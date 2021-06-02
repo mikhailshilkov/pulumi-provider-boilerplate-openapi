@@ -1,22 +1,24 @@
-# xyz Pulumi Provider
+# xyz Pulumi Open API-based Provider
 
-This repo is a boilerplate showing how to create a native Pulumi provider.  You can search-replace `xyz` with the name of your desired provider as a starting point for creating a provider that manages resources in the target cloud.
+This repo is a boilerplate showing how to create a native Pulumi provider. The resource model is generated automatically from a simple Open API specification.
+
+You can search-replace `xyz` with the name of your desired provider as a starting point for creating a provider that manages resources in the target cloud.
 
 ## Navigate the repository
 
-### Resources
+### Open API spec
 
-Custom resources are defined in `pkg/resources`. There is a separate Go file for each resource. The `pkg/resources/resource.go` file defines the "registry" of all resources registered within the provider.
+A sample Open API (Swagger) specification is location in `open-api-spec/todo-backend.json`. It is based on the [`Todo-Backend`](https://www.todobackend.com/) project. The specification contains create/update/get/delete operations for a single resource: a `Todo`.
 
-The boilerplate repository comes with a single resource `RandomString` that generates a persistent random value of a given length. Try adding a new resource next to it while learning how the providers work.
+Please note that the sample specification is very simple and doesn't utilize a lot of more advanced features of Open API. The generation code is coupled to this particular specificaion and will likely not work for an arbitrary specification of your choice. All APIs are different and you will have to do the work of mapping your API to Pulumi resource model.
 
-### Provider gRPC
+### Provider
 
-Pulumi providers implement a gRPC protocol to connect to the Pulumi engine (CLI). Most of the code for the provider implementation is in `pkg/provider/provider.go`. You shouldn't need to change this file for simple resources.
+Pulumi providers implement a gRPC protocol to connect to the Pulumi engine (CLI). The code for the provider implementation is in `pkg/provider/provider.go`. You will likely need to adjust this implementation to implement the features of your target API, including authentication, URL structures, parameter structure, response codes, error handling, and more.
 
 ### Code generator
 
-A code generator is available which generates SDKs in TypeScript, Python, Go and .NET which are also checked in to the `sdk` folder. The SDKs are generated from the schema definitions of the resources described above. Be sure to keep the `Schema` properties in sync with the resource CRUD operations.
+A code generator is available which generates SDKs in TypeScript, Python, Go and .NET which are also checked in to the `sdk` folder. The SDKs are generated from the schema definitions based on the Open API spec described above.
 
 ### Example
 
