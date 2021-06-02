@@ -1,0 +1,154 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Todo Backend API",
+    "version": "1.0.0",
+    "title": "Todos API"
+  },
+  "host": "functodobackend.azurewebsites.net",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api",
+  "paths": {
+    "/todos": {
+      "post": {
+        "summary": "Create a new todo",
+        "operationId": "Todo_Create",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "description": "Todo Object",
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/todos/{todoId}": {
+      "get": {
+        "summary": "Details of one Todo",
+        "operationId": "Todo_Get",
+        "parameters": [
+          {
+            "name": "todoId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          },
+          "404": {
+            "description": "Invalid Todo ID value"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "summary": "delete a single todo",
+        "operationId": "Todo_Delete",
+        "parameters": [
+          {
+            "name": "todoId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "can not find todo"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update an existing Todo",
+        "operationId": "Todo_Update",
+        "parameters": [
+          {
+            "name": "todoId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          },
+          "404": {
+            "description": "Todo not found"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Todo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "title": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "completed": {
+          "type": "boolean"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": ["title"]
+    }
+  }
+}

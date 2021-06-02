@@ -1,0 +1,64 @@
+{
+    "name": "xyz",
+    "config": {},
+    "provider": {},
+    "resources": {
+        "xyz:index:Todo": {
+            "properties": {
+                "completed": {
+                    "type": "boolean"
+                },
+                "order": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "completed",
+                "order",
+                "title",
+                "url"
+            ],
+            "inputProperties": {
+                "completed": {
+                    "type": "boolean"
+                },
+                "order": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "title"
+            ]
+        }
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*",
+                "System.Collections.Immutable": "1.6.0"
+            }
+        },
+        "go": {},
+        "nodejs": {
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            }
+        },
+        "python": {
+            "usesIOClasses": true
+        }
+    }
+}

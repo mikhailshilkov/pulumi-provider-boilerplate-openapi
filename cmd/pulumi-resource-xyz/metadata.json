@@ -1,0 +1,6 @@
+{
+    "baseUrl": "https://functodobackend.azurewebsites.net/api",
+    "resourceUrls": {
+        "xyz:index:Todo": "/todos"
+    }
+}
